@@ -1,5 +1,5 @@
 import "./assets/css/style.css";  
-import './App1.css'
+ import './App1.css'
 import { Register } from "./components/Register";
 import { Login } from "./components/Login";
 import { Home } from "./components/Home";

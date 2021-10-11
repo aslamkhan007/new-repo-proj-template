@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
+// import Notifications from "react-notifications/lib/Notifications";
+import { NotificationContainer } from "react-notifications";
 import { NavLink, useHistory, Redirect } from "react-router-dom";
 import loginpic from "../images/logo.png";
 import { useState } from "react";
 import { Navigation } from "./Navigation";
 import { validation } from "./validation";
 import { Loader } from "./Loader/Loader";
-
+import "react-notifications/lib/notifications.css";
+import { createNotification } from "./Notification/Notification";
 export function Login() {
   const [userLogin, setLogin] = useState({ email: "", password: "" });
   const [loader, setLoader] = useState(false);
+  const [notification, setNotification] = useState({});
 
   const [errors, setErrors] = useState({});
 
@@ -30,7 +34,7 @@ export function Login() {
       e.preventDefault();
 
       setErrors(validation(userLogin));
-
+      // setLoader(true);
       const response = await fetch("http://localhost:3030/authentication", {
         method: "post",
         headers: {
@@ -44,18 +48,10 @@ export function Login() {
       });
 
       const data1 = await response.json();
-console.log(data1)
-// if(data1){
-//   history.push("/home");
-// }else{
-//   <Loader/>
-// }
-      // if (data1.email) {
-      //   console.log("hello");
-      // } else {
-      // }
-     // console.log(data1);
-      if (data1 && data1.accessToken) {
+      console.log(response, "llllllllllllllllllll");
+      if (response.status === 201) {
+        createNotification("success", "welcome user ");
+        // console.log(data1, "hcdgvdvdvd");
         localStorage.setItem(
           "token",
           JSON.stringify({
@@ -64,26 +60,39 @@ console.log(data1)
             email,
           })
         );
+        setTimeout(() => {
+          setLoader(false);
+          console.log(data1, "hhhhhhhhhhhh");
+          history.push("/home");
+        }, 2000);
 
-        console.log(data1, "hhhhhhhhhhhh");
-        history.push("/home");
-       }
-       // else {
-      //   console.log("hellol");
-      // }
+        // setLoader(false);
+        //  history.push("/login")
+      } else {
+        console.log(data1, " elselllhhhhhhhhhhhhhhlllllllllllllllll");
+        if (data1.code == 401) {
+          createNotification("warning", "invalid credentials");
+
+          console.log(data1.code);
+        }
+      }
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       history.push("/home");
     }
-  });
+  }, []);
+
   return (
     <>
-      
+      {loader ? (
+        <Loader />
+      ) : (
         <div className="sufee-login d-flex align-content-center flex-wrap  bg-dark ">
           <div className="container">
             <div className="login-content">
@@ -149,8 +158,9 @@ console.log(data1)
               </div>
             </div>
           </div>
+          <NotificationContainer />
         </div>
-      
+      )}
     </>
   );
 }

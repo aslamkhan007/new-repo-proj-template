@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
+import { useHistory } from "react-router";
+export const Loader = (data1) => {
+    const history  = useHistory();
 
-export const Loader =()=>{
-const [loader ,setLoader] = useState(true)
+  return (
+    
+      <div class="loader">
 
-useEffect(()=>{
-    setLoader(false)
-})
-
-    return <div class="loader"></div>
-   
-}
+          Loading...
+         {/* if(data1){
+             history.push("/login")
+         } */}
+      </div>
+    
+  );
+};
