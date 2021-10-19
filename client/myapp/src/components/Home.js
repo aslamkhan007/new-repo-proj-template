@@ -1,21 +1,25 @@
 import React from "react";
 import { SideBar } from "./sidebar/Sidebar";
 import { Navigation } from "./Navigation";
+import { User } from "./pages/User";
 
 export function Home() {
   return (
     <>
       <Navigation />
+      <div className="d-flex">
       <SideBar />
+      
 
-      <div className="content">
+      <div className="content" style ={{marginLeft:"-3px",padding:"1px"}}>
         <div className="animated fadeIn">
-          <div className="row" style={{ marginLeft: "255px" }}>
+          <div className="row" >
             <div className="col-lg-6">
               <div className="card">
                 <div className="card-body">
                   <div className="progress-box progress-1">
                     <h4 className="por-title">Visits</h4>
+
                     <div className="por-txt">96,930 Users (40%)</div>
                     <div className="progress mb-2" style={{ height: "5px" }}>
                       <div
@@ -431,6 +435,7 @@ export function Home() {
           </div>
         </div>
       </div>
+      </div>  
     </>
   );
 }

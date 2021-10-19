@@ -9,6 +9,8 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { Product } from "./components/Product";
 import { Navigation } from "./components/Navigation";
 import { Logout } from "./components/Logout";
+import { User } from "./components/pages/User";
+import { AddUser } from "./components/pages/AddUser";
 
 
 function App() {
@@ -19,9 +21,11 @@ function App() {
         {/* <Route exact path="/product" component={Product} /> */}
         <Route exact path="/" component={Login} />
         <Route exact path="/logout" component={Logout} />
-        {/* <Route exact path="/register" component={Register} /> */}
+        <Route exact path="/register" component={Register} />
+        <Route exact path ="/user" component={User}/>
+        <Route exact path = "/user/add" component={AddUser} />
      
-        <PrivateRouter exact path ="/register" component ={Register}/>
+        {/* <PrivateRouter exact path ="/register" component ={Register}/> */}
         <PrivateRouter  path ="/home" component ={Home}/>
         <PrivateRouter exact path ="/product" component ={Product}/>
 

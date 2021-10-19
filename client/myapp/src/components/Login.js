@@ -34,7 +34,7 @@ export function Login() {
       e.preventDefault();
 
       setErrors(validation(userLogin));
-      // setLoader(true);
+      setLoader(true);
       const response = await fetch("http://localhost:3030/authentication", {
         method: "post",
         headers: {
@@ -61,7 +61,7 @@ export function Login() {
           })
         );
         setTimeout(() => {
-          setLoader(false);
+          // setLoader(false);
           console.log(data1, "hhhhhhhhhhhh");
           history.push("/home");
         }, 2000);
@@ -69,11 +69,17 @@ export function Login() {
         // setLoader(false);
         //  history.push("/login")
       } else {
-        console.log(data1, " elselllhhhhhhhhhhhhhhlllllllllllllllll");
-        if (data1.code == 401) {
-          createNotification("warning", "invalid credentials");
+       // console.log(data1, " elselllhhhhhhhhhhhhhhlllllllllllllllll");
 
-          console.log(data1.code);
+        if (!email || !password) {
+          setLoader(false);
+         // console.log(data1.code == 401);
+          createNotification("warning", "please type input filed");
+        } else if (data1.code == 401) {
+          setLoader(false);
+          createNotification("error", "invalid credentials");
+
+          console.log(data1.code,"cfsfffssfd");
         }
       }
     } catch (err) {

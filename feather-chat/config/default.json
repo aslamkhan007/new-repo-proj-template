@@ -7,9 +7,9 @@
     "max": 50
   },
   "authentication": {
-    "entity": "user",
+    "entity": "users",
     "service": "users",
-    "secret": "7RvM8z9ofnm4SepN/tyEUgseSYA=",
+    "secret": "6CrZtI+BXyaQoicyzhJpQkxokWM=",
     "authStrategies": [
       "jwt",
       "local"
@@ -28,5 +28,5 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb://localhost:27017/data"
+  "mongodb": "mongodb://localhost:27017/userdata"
 }

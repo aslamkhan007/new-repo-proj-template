@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Navigation } from "../Navigation";
+import { User } from "../pages/User";
 
 export const SideBar = () => {
   return (
@@ -19,7 +20,7 @@ export const SideBar = () => {
               </li>
 
               <li>
-                <NavLink to="">
+                <NavLink to="/user">
                   <i className="menu-icon fa fa-laptop"></i>User{" "}
                 </NavLink>
               </li>
